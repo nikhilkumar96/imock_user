@@ -1,6 +1,9 @@
-from sanic.response import json
 import json as json1
+from sanic.response import json
 from sanic.views import HTTPMethodView
+
+from resources.register_parser import RegisterParser
+from controllers.register_controller import RegisterController
 
 
 class RegisterView(HTTPMethodView):
@@ -10,7 +13,8 @@ class RegisterView(HTTPMethodView):
         return json(json1.loads(response))
 
     async def post(self, request):
-        response = "invalid"
+        parser = RegisterParser().parse(request)
+        response = RegisterController(parser['user_id'], parser['user_data'])
         return json(response)
 
     async def patch(self, request):
