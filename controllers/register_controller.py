@@ -26,3 +26,5 @@ class RegisterController:
     async def update_user_data(self):
         return await RegisterDTO().update_user(self.user_id, self.user_data)
 
+    async def delete_user_data(self):
+        return await RegisterDTO().delete_user(self.user_id)
