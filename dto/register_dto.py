@@ -20,3 +20,6 @@ class RegisterDTO:
         result = self.collection.find_one({USER_ID_TAG: user_id}, {})
         return str(result[OBJECT_ID_TAG]) if result else None
 
+    async def get_user(self, user_id):
+        result = self.collection.find_one({USER_ID_TAG: user_id}, {OBJECT_ID_TAG: 0})
+        return result
