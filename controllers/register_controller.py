@@ -1,5 +1,6 @@
 from sanic import exceptions
 
+from constant import *
 from dto.register_dto import RegisterDTO
 from exceptions.exception_constants import ExceptionConstants
 
@@ -20,7 +21,8 @@ class RegisterController:
         return await RegisterDTO().check_user(self.user_id)
 
     async def get_user_data(self):
-        return await RegisterDTO().get_user(self.user_id)
+        return await RegisterDTO().get_filtered_user(self.user_id)
 
-    def update_user_data(self):
-        pass
+    async def update_user_data(self):
+        return await RegisterDTO().update_user(self.user_id, self.user_data)
+

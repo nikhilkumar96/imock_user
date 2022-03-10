@@ -1,6 +1,5 @@
 from sanic.response import json
 from sanic.views import HTTPMethodView
-from sanic import exceptions
 
 from constant import *
 from resources.register_parser import RegisterParser
@@ -20,5 +19,6 @@ class RegisterView(HTTPMethodView):
         return json(response)
 
     async def patch(self, request):
-        response = "invalid"
+        parser = RegisterParser().patch_parse(request)
+        response = await RegisterController(parser[USER_ID_LOCAL_TAG], parser[USER_DATA_LOCAL_TAG]).update_user_data()
         return json(response)
