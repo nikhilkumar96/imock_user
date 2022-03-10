@@ -14,7 +14,7 @@ class RegisterView(HTTPMethodView):
 
     async def post(self, request):
         parser = RegisterParser().parse(request)
-        response = RegisterController(parser['user_id'], parser['user_data'])
+        response = await RegisterController(parser['user_id'], parser['user_data']).save_data()
         return json(response)
 
     async def patch(self, request):
