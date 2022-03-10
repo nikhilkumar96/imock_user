@@ -1,6 +1,7 @@
 from dto.register_dto import RegisterDTO
 from sanic import exceptions
 
+
 class RegisterController:
 
     def __init__(self, user_id=None, user_data=None):
@@ -17,7 +18,7 @@ class RegisterController:
         return await RegisterDTO().check_user(self.user_id)
 
     async def get_user_data(self):
-        pass
+        return await RegisterDTO().get_user(self.user_id)
 
     def update_user_data(self):
         pass
