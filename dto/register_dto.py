@@ -33,3 +33,7 @@ class RegisterDTO(CommonDTO):
     async def update_user(self, user_id, user_data):
         result = self.collection.update_one({USER_ID_TAG: user_id}, {"$set": user_data})
         return {STATUS_TAG: result.acknowledged}
+
+    async def delete_user(self, user_id):
+        result = self.collection.delete_one({USER_ID_TAG: user_id})
+        return {STATUS_TAG: result.acknowledged}

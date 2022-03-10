@@ -22,3 +22,8 @@ class RegisterView(HTTPMethodView):
         parser = RegisterParser().patch_parse(request)
         response = await RegisterController(parser[USER_ID_LOCAL_TAG], parser[USER_DATA_LOCAL_TAG]).update_user_data()
         return json(response)
+
+    async def delete(self, request):
+        parser = RegisterParser().get_parse(request)
+        response = await RegisterController(parser[USER_ID_LOCAL_TAG], None).delete_user_data()
+        return json(response)
