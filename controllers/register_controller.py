@@ -8,12 +8,13 @@ class RegisterController:
         self.user_data = user_data
 
     async def save_data(self):
-        if await self.check_user():
-            return "User Already Exist"
+        user_check = await self.check_user()
+        if user_check:
+            return f"User Already Exist at {user_check}"
         return await RegisterDTO().add_user(self.user_data)
 
     async def check_user(self):
-        pass
+        return await RegisterDTO().check_user(self.user_id)
 
     async def get_user_data(self):
         pass

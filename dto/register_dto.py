@@ -11,7 +11,12 @@ class RegisterDTO:
         self.db = self.client[DB_NAME]
         self.collection = self.db[USER_COLLECTION]
 
-    async def add_user(self, data):
-        data['_id'] = ObjectId()
-        save = self.collection.insert_one(data)
-        return {"status": save.acknowledged, "value": str(save.inserted_id)}
+    async def add_user(self, user_data):
+        user_data[OBJECT_ID_TAG] = ObjectId()
+        result = self.collection.insert_one(user_data)
+        return {STATUS_TAG: result.acknowledged, VALUE_TAG: str(result.inserted_id)}
+
+    async def check_user(self, user_id):
+        result = self.collection.find_one({USER_ID_TAG: user_id}, {})
+        return str(result[OBJECT_ID_TAG]) if result else None
+
