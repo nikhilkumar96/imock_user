@@ -11,8 +11,6 @@ class RegisterView(HTTPMethodView):
 
     async def get(self, request):
         parser = RegisterParser().get_parse(request)
-        if not parser[USER_ID_LOCAL_TAG]:
-            raise exceptions.InvalidUsage(f"User Id not present in request")
         response = await RegisterController(parser[USER_ID_LOCAL_TAG], None).get_user_data()
         return json(response)
 
