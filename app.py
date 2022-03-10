@@ -10,7 +10,7 @@ settings = dict(
     LOGO=None,
 )
 app.config.update(settings)
-
+app.config.FALLBACK_ERROR_FORMAT = 'json'
 BaseModel.init_app(app)
 api_v1.setup_api(app)
 

@@ -1,5 +1,5 @@
 from dto.register_dto import RegisterDTO
-
+from sanic import exceptions
 
 class RegisterController:
 
@@ -10,7 +10,7 @@ class RegisterController:
     async def save_data(self):
         user_check = await self.check_user()
         if user_check:
-            return f"User Already Exist at {user_check}"
+            raise exceptions.InvalidUsage(f"User Already Exist at {user_check}")
         return await RegisterDTO().add_user(self.user_data)
 
     async def check_user(self):
