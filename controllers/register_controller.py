@@ -1,6 +1,5 @@
 from sanic import exceptions
 
-from constant import *
 from dto.register_dto import RegisterDTO
 from exceptions.exception_constants import ExceptionConstants
 
